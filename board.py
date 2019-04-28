@@ -11,7 +11,7 @@ Date edited:    2019/04/28
 '''
 
 # Libraries:
-import pygame
+import pygame as pg
 
 # Local files:
 # import RLScrabble
@@ -93,10 +93,10 @@ class Board:
             self.square[x][y] = (None, Board.PREMIUM_WORD_3X)
 
     def draw_board(self, DISPLAY_SCRABBLE):
-        pygame.draw.rect(DISPLAY_SCRABBLE, Board.COLOR_BACKGROUND,
-                         (Board.DISTANCE_TOP - 5, Board.DISTANCE_LEFT - 5,
-                          (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + 4) * Board.DIMENSION_BOARD + 8,
-                          (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + 4) * Board.DIMENSION_BOARD + 8))
+        pg.draw.rect(DISPLAY_SCRABBLE, Board.COLOR_BACKGROUND,
+                     (Board.DISTANCE_TOP - 5, Board.DISTANCE_LEFT - 5,
+                      (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + 4) * Board.DIMENSION_BOARD + 8,
+                      (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + 4) * Board.DIMENSION_BOARD + 8))
 
         for x in range(Board.DIMENSION_BOARD):
             for y in range(Board.DIMENSION_BOARD):
@@ -114,8 +114,8 @@ class Board:
                 else:
                     square_color = Board.COLOR_DEFAULT
 
-                pygame.draw.rect(DISPLAY_SCRABBLE, Board.COLOR_TILE_BORDER,
-                                 (x_position + 2, y_position + 2, Board.SIZE_SQUARE_AREA - 3, Board.SIZE_SQUARE_AREA - 3))
+                pg.draw.rect(DISPLAY_SCRABBLE, Board.COLOR_TILE_BORDER,
+                             (x_position + 2, y_position + 2, Board.SIZE_SQUARE_AREA - 3, Board.SIZE_SQUARE_AREA - 3))
 
-                pygame.draw.rect(DISPLAY_SCRABBLE, square_color,
-                                 (x_position + 3, y_position + 3, Board.SIZE_SQUARE_AREA - 5, Board.SIZE_SQUARE_AREA - 5))
+                pg.draw.rect(DISPLAY_SCRABBLE, square_color,
+                             (x_position + 3, y_position + 3, Board.SIZE_SQUARE_AREA - 5, Board.SIZE_SQUARE_AREA - 5))

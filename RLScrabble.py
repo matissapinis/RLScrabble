@@ -11,28 +11,28 @@ Date edited:    2019/04/28
 '''
 
 # Libraries:
-import pygame
+import pygame as pg
 
 # Local files:
 import board, rack
 
-pygame.init()
+pg.init()
 
 SIZE_DISPLAY_WIDTH = 1200
 SIZE_DISPLAY_HEIGHT = 900
 
-DISPLAY_SCRABBLE = pygame.display.set_mode((SIZE_DISPLAY_WIDTH,SIZE_DISPLAY_HEIGHT))
-pygame.display.set_caption("RLScrabble")
+DISPLAY_SCRABBLE = pg.display.set_mode((SIZE_DISPLAY_WIDTH, SIZE_DISPLAY_HEIGHT))
+pg.display.set_caption("RLScrabble")
 DISPLAY_SCRABBLE.fill((255, 255, 255))
 
 def RLScrabble():
     game_running = True
     run_game()
     while game_running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT or event.type == pygame.KEYUP:
+        for event in pg.event.get():
+            if event.type == pg.QUIT or event.type == pg.KEYUP:
                 game_running = False
-        pygame.display.update()
+        pg.display.update()
 
 def run_game():
     game_board = board.Board()
@@ -42,5 +42,5 @@ def run_game():
     p1_rack.draw_rack(DISPLAY_SCRABBLE)
 
 RLScrabble()
-pygame.quit()
+pg.quit()
 quit()

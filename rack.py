@@ -13,9 +13,12 @@ Date edited:    2019/04/28
 '''
 To-do for rack.py:
 1) Shuffle k <= 7 tiles.
+2) Move COLOR_TILE to a new tile.py.
+3) Tidy up and explain long drawing parameters.
+4) Make drawing positions dependent on window size from new window.py.
 '''
 
-import pygame
+import pygame as pg
 
 import board
 
@@ -39,17 +42,17 @@ class Rack:
         return len(self.rack) == Rack.DIMENSION_RACK
 
     def draw_rack(self, DISPLAY_SCRABBLE):
-        pygame.draw.rect(DISPLAY_SCRABBLE, board.Board.COLOR_BACKGROUND,
-                         (Rack.DISTANCE_TOP - 5, Rack.DISTANCE_LEFT - 5,
-                          (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + 4) * Rack.DIMENSION_RACK + 7,
-                          (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + 4) * 1 + 7))
+        pg.draw.rect(DISPLAY_SCRABBLE, board.Board.COLOR_BACKGROUND,
+                     (Rack.DISTANCE_TOP - 5, Rack.DISTANCE_LEFT - 5,
+                      (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + 4) * Rack.DIMENSION_RACK + 7,
+                      (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + 4) * 1 + 7))
 
         for x in range(Rack.DIMENSION_RACK):
             x_position = Rack.DISTANCE_TOP + x * (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP)
 
-            pygame.draw.rect(DISPLAY_SCRABBLE, board.Board.COLOR_TILE_BORDER,
-                             (x_position + 2, Rack.DISTANCE_LEFT + 2, board.Board.SIZE_SQUARE_AREA - 3, board.Board.SIZE_SQUARE_AREA - 3))
+            pg.draw.rect(DISPLAY_SCRABBLE, board.Board.COLOR_TILE_BORDER,
+                         (x_position + 2, Rack.DISTANCE_LEFT + 2, board.Board.SIZE_SQUARE_AREA - 3, board.Board.SIZE_SQUARE_AREA - 3))
 
-            pygame.draw.rect(DISPLAY_SCRABBLE, Rack.COLOR_TILE,
-                             (x_position + 3, Rack.DISTANCE_LEFT + 3, board.Board.SIZE_SQUARE_AREA - 5, board.Board.SIZE_SQUARE_AREA - 5))
+            pg.draw.rect(DISPLAY_SCRABBLE, Rack.COLOR_TILE,
+                         (x_position + 3, Rack.DISTANCE_LEFT + 3, board.Board.SIZE_SQUARE_AREA - 5, board.Board.SIZE_SQUARE_AREA - 5))
 
