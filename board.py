@@ -3,14 +3,18 @@ University of Latvia Faculty of Computing Qualification paper:
 Implementation of the board game "Scrabble"
 
 board.py:
-Contains the class modelling the basic "Scrabble" game board.
+Contains the class modelling the basic game board.
 
 Author:         Matīss Apinis (ma17058)
 Date created:   2019/04/28
 Date edited:    2019/04/28
 '''
 
+# Libraries:
 import pygame
+
+# Local files:
+# import RLScrabble
 
 class Board:
     DIMENSION_BOARD = 15
@@ -50,12 +54,6 @@ class Board:
                          (7, 0), (7, 14),
                          (14, 0), (14, 7), (14, 14)]
 
-    COLOR_BLACK = (0, 0, 0)
-    COLOR_WHITE = (255, 255, 255)
-    COLOR_RED = (255, 0, 0)
-    COLOR_GREEN = (0, 255, 0)
-    COLOR_BLUE = (0, 0, 255)
-
     COLOR_BACKGROUND = (15, 75, 0)
     COLOR_TILE_BORDER = (100, 100, 100)
 
@@ -69,8 +67,11 @@ class Board:
     SIZE_SQUARE_BORDER = 0
     SIZE_SQUARE_GAP = 4
 
-    DISTANCE_TOP = 80
-    DISTANCE_LEFT = 60
+    # DISTANCE_TOP = RLScrabble.SIZE_DISPLAY_HEIGHT * 0.05
+    # DISTANCE_LEFT = RLScrabble.SIZE_DISPLAY_WIDTH * 0.05
+
+    DISTANCE_TOP = 1200 * 0.05
+    DISTANCE_LEFT = 900 * 0.05
 
     def __init__(self):
         self.square = []

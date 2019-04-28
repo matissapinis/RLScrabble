@@ -14,7 +14,7 @@ Date edited:    2019/04/28
 import pygame
 
 # Local files:
-import board
+import board, rack
 
 pygame.init()
 
@@ -23,7 +23,7 @@ SIZE_DISPLAY_HEIGHT = 900
 
 DISPLAY_SCRABBLE = pygame.display.set_mode((SIZE_DISPLAY_WIDTH,SIZE_DISPLAY_HEIGHT))
 pygame.display.set_caption("RLScrabble")
-DISPLAY_SCRABBLE.fill(board.Board.COLOR_WHITE)
+DISPLAY_SCRABBLE.fill((255, 255, 255))
 
 def RLScrabble():
     game_running = True
@@ -37,6 +37,9 @@ def RLScrabble():
 def run_game():
     game_board = board.Board()
     game_board.draw_board(DISPLAY_SCRABBLE)
+
+    p1_rack = rack.Rack()
+    p1_rack.draw_rack(DISPLAY_SCRABBLE)
 
 RLScrabble()
 pygame.quit()
