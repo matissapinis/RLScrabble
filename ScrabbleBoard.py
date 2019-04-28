@@ -56,6 +56,7 @@ class Board:
     COLOR_GREEN = (0, 255, 0)
     COLOR_BLUE = (0, 0, 255)
 
+    COLOR_BACKGROUND = (15, 75, 0)
     COLOR_TILE_BORDER = (100, 100, 100)
 
     COLOR_DEFAULT = (30, 150, 0)
@@ -91,13 +92,15 @@ class Board:
             self.square[x][y] = (None, Board.PREMIUM_WORD_3X)
 
     def draw_board(self, DISPLAY_SCRABBLE):
+        pygame.draw.rect(DISPLAY_SCRABBLE, Board.COLOR_BACKGROUND,
+                         (Board.DISTANCE_TOP - 5, Board.DISTANCE_LEFT - 5,
+                          (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + 4) * Board.DIMENSION_BOARD + 8,
+                          (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + 4) * Board.DIMENSION_BOARD + 8))
+
         for x in range(Board.DIMENSION_BOARD):
             for y in range(Board.DIMENSION_BOARD):
                 x_position = Board.DISTANCE_TOP + x * (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + Board.SIZE_SQUARE_GAP)
                 y_position = Board.DISTANCE_LEFT + y * (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + Board.SIZE_SQUARE_GAP)
-
-                # pygame.draw.rect(DISPLAY_SCRABBLE, COLOR_BLUE2,
-                #                 (x,y,(Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER),(Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER)))
 
                 if self.square[x][y][1] == Board.PREMIUM_LETTER_2X:
                     square_color = Board.COLOR_LETTER_2X
