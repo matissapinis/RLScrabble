@@ -7,25 +7,24 @@ Contains the class modelling player tile racks.
 
 Author:         Matīss Apinis (ma17058)
 Date created:   2019/04/28
-Date edited:    2019/04/28
+Date edited:    2019/04/29
 '''
 
 '''
 To-do for rack.py:
 1) Shuffle k <= 7 tiles.
-2) Move COLOR_TILE to a new tile.py.
-3) Tidy up and explain long drawing parameters.
-4) Make drawing positions dependent on window size from new window.py.
+2) Tidy up and explain long drawing parameters.
+3) Make drawing positions dependent on window size from new window.py.
 '''
 
+# Libraries:
 import pygame as pg
 
-import board
+# Local files:
+import board, tile
 
 class Rack:
     DIMENSION_RACK = 7
-
-    COLOR_TILE = (230, 230, 230)
 
     DISTANCE_TOP = 270 - 2
     DISTANCE_LEFT = 840
@@ -50,9 +49,9 @@ class Rack:
         for x in range(Rack.DIMENSION_RACK):
             x_position = Rack.DISTANCE_TOP + x * (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP)
 
-            pg.draw.rect(DISPLAY_SCRABBLE, board.Board.COLOR_TILE_BORDER,
+            pg.draw.rect(DISPLAY_SCRABBLE, tile.Tile.COLOR_TILE_BORDER,
                          (x_position + 2, Rack.DISTANCE_LEFT + 2, board.Board.SIZE_SQUARE_AREA - 3, board.Board.SIZE_SQUARE_AREA - 3))
 
-            pg.draw.rect(DISPLAY_SCRABBLE, Rack.COLOR_TILE,
+            pg.draw.rect(DISPLAY_SCRABBLE, tile.Tile.COLOR_TILE_AREA,
                          (x_position + 3, Rack.DISTANCE_LEFT + 3, board.Board.SIZE_SQUARE_AREA - 5, board.Board.SIZE_SQUARE_AREA - 5))
 

@@ -7,7 +7,12 @@ Contains the main part of the application that initiates the "Scrabble" game.
 
 Author:         Matīss Apinis (ma17058)
 Date created:   2019/04/28
-Date edited:    2019/04/28
+Date edited:    2019/04/29
+'''
+
+'''
+To-do for RLScrabble.py:
+1) Make drawing positions dependent on window size from new window.py.
 '''
 
 # Libraries:

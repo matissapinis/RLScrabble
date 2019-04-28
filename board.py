@@ -7,14 +7,20 @@ Contains the class modelling the basic game board.
 
 Author:         Matīss Apinis (ma17058)
 Date created:   2019/04/28
-Date edited:    2019/04/28
+Date edited:    2019/04/29
+'''
+
+'''
+To-do for board.py:
+1) Tidy up and explain long drawing parameters.
+2) Make drawing positions dependent on window size from new window.py.
 '''
 
 # Libraries:
 import pygame as pg
 
 # Local files:
-# import RLScrabble
+import tile
 
 class Board:
     DIMENSION_BOARD = 15
@@ -55,8 +61,6 @@ class Board:
                          (14, 0), (14, 7), (14, 14)]
 
     COLOR_BACKGROUND = (15, 75, 0)
-    COLOR_TILE_BORDER = (100, 100, 100)
-
     COLOR_DEFAULT = (30, 150, 0)
     COLOR_LETTER_2X = (100, 200, 255)
     COLOR_LETTER_3X = (0, 100, 255)
@@ -114,7 +118,7 @@ class Board:
                 else:
                     square_color = Board.COLOR_DEFAULT
 
-                pg.draw.rect(DISPLAY_SCRABBLE, Board.COLOR_TILE_BORDER,
+                pg.draw.rect(DISPLAY_SCRABBLE, tile.Tile.COLOR_TILE_BORDER,
                              (x_position + 2, y_position + 2, Board.SIZE_SQUARE_AREA - 3, Board.SIZE_SQUARE_AREA - 3))
 
                 pg.draw.rect(DISPLAY_SCRABBLE, square_color,
