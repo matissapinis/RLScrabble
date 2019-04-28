@@ -25,6 +25,12 @@ class Tile:
     COLOR_TILE_BORDER = (100, 100, 100)
     COLOR_TILE_AREA = (230, 230, 230)
 
+    COLOR_TILE_BORDER_UNCLICKED = (100, 100, 100)
+    COLOR_TILE_BORDER_CLICKED = (70, 70, 70)
+
+    COLOR_TILE_AREA_UNCLICKED = (230, 230, 230)
+    COLOR_TILE_AREA_CLICKED = (200, 200, 200)
+
     pg.font.init()
 
     NAME_FONT_LETTER = 'liberationsans'
@@ -39,6 +45,13 @@ class Tile:
     def __init__(self, letter, value):
         self.letter = letter
         self.value = value
+        self.color_area = Tile.COLOR_TILE_AREA_UNCLICKED
+
+    def is_tile_clicked(self, tile_clicked=False):
+        if tile_clicked:
+            self.color_area = Tile.COLOR_TILE_AREA_CLICKED
+        else:
+            self.color_area = Tile.COLOR_TILE_AREA_UNCLICKED
 
     def is_tile_blank(self, letter, value):
         return letter == None and value == 0

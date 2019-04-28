@@ -13,6 +13,7 @@ Date edited:    2019/04/29
 '''
 To-do for RLScrabble.py:
 1) Make drawing positions dependent on window size from new window.py.
+2) Highlight clicked rack tiles.
 '''
 
 # Libraries:
@@ -27,17 +28,35 @@ pg.font.init()
 SIZE_DISPLAY_WIDTH = 1200
 SIZE_DISPLAY_HEIGHT = 900
 
+COLOR_DISPLAY = (255, 255, 255)
+
 DISPLAY_SCRABBLE = pg.display.set_mode((SIZE_DISPLAY_WIDTH, SIZE_DISPLAY_HEIGHT))
 pg.display.set_caption("RLScrabble")
-DISPLAY_SCRABBLE.fill((255, 255, 255))
+DISPLAY_SCRABBLE.fill(COLOR_DISPLAY)
 
 def RLScrabble():
     game_running = True
+
+    mouse_moved = False
+    mouse_clicked = False
+
     run_game()
     while game_running:
         for event in pg.event.get():
-            if event.type == pg.QUIT or event.type == pg.KEYUP:
+            if event.type == pg.QUIT:
                 game_running = False
+            elif event.type == pg.MOUSEMOTION:
+                mouse_x_pos, mouse_y_pos = event.pos
+                mouse_moved = True
+            elif event.type == pg.MOUSEBUTTONUP:
+                mouse_x_pos, mouse_y_pos = event.pos
+                mouse_clicked = True
+                print(event.pos) ##
+
+            if mouse_clicked:
+                ## TBC: Highlight clicked rack tile.
+                assert("## TBC:")
+
         pg.display.update()
 
 def run_game():
@@ -48,6 +67,5 @@ def run_game():
     p1_rack.draw_rack(DISPLAY_SCRABBLE)
 
 RLScrabble()
-# print(pg.font.get_fonts())
 pg.quit()
 quit()
