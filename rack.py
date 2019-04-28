@@ -34,10 +34,10 @@ class Rack:
         for x in range(Rack.DIMENSION_RACK):
             self.rack.append(None)
 
-    def is_empty_rack(self):
+    def is_rack_empty(self):
         return len(self.rack) == 0
 
-    def is_full_rack(self):
+    def is_rack_full(self):
         return len(self.rack) == Rack.DIMENSION_RACK
 
     def draw_rack(self, DISPLAY_SCRABBLE):

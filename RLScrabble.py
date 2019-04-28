@@ -22,6 +22,7 @@ import pygame as pg
 import board, rack
 
 pg.init()
+pg.font.init()
 
 SIZE_DISPLAY_WIDTH = 1200
 SIZE_DISPLAY_HEIGHT = 900
@@ -47,5 +48,6 @@ def run_game():
     p1_rack.draw_rack(DISPLAY_SCRABBLE)
 
 RLScrabble()
+# print(pg.font.get_fonts())
 pg.quit()
 quit()

@@ -13,7 +13,8 @@ Date edited:    2019/04/29
 '''
 To-do for board.py:
 1) Tidy up and explain long drawing parameters.
-2) Make drawing positions dependent on window size from new window.py.
+2) Evaluate need for SIZE_SQUARE_GAP vs. clarifying drawing parameters.
+3) Make drawing positions dependent on window size from new window.py.
 '''
 
 # Libraries:
