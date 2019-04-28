@@ -2,7 +2,7 @@
 University of Latvia Faculty of Computing Qualification paper:
 Implementation of the board game "Scrabble"
 
-ScrabbleBoard.py:
+board.py:
 Contains the class modelling the basic "Scrabble" game board.
 
 Author:         Matīss Apinis (ma17058)
