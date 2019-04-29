@@ -12,7 +12,7 @@ Date edited:    2019/04/29
 
 '''
 To-do for tile.py:
-1) Make draw_tile(...) superseed the rack.py rectangle drawing.
+1) Make draw_tile(...) primary in rack.py rectangle drawing.
 '''
 
 # Libraries:

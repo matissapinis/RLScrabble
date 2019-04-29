@@ -14,6 +14,7 @@ Date edited:    2019/04/29
 To-do for RLScrabble.py:
 1) Make drawing positions dependent on window size from new window.py.
 2) Highlight clicked rack tiles.
+3) Make window and consequently tile size dependent on resolution / monitor size.
 '''
 
 # Libraries:
@@ -25,8 +26,8 @@ import board, rack
 pg.init()
 pg.font.init()
 
-SIZE_DISPLAY_WIDTH = 1200
-SIZE_DISPLAY_HEIGHT = 900
+SIZE_DISPLAY_WIDTH = 1200 # 1200 / 800
+SIZE_DISPLAY_HEIGHT = 900 # 900 / 600
 
 COLOR_DISPLAY = (255, 255, 255)
 
