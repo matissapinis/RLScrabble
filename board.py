@@ -21,7 +21,7 @@ To-do for board.py:
 import pygame as pg
 
 # Local files:
-import tile
+import tile, window
 
 class Board:
     DIMENSION_BOARD = 15
@@ -72,8 +72,9 @@ class Board:
     SIZE_SQUARE_BORDER = 0
     SIZE_SQUARE_GAP = 4 # 4 / 2
 
-    # DISTANCE_TOP = RLScrabble.SIZE_DISPLAY_HEIGHT * 0.05
-    # DISTANCE_LEFT = RLScrabble.SIZE_DISPLAY_WIDTH * 0.05
+    ## Why does this create an erroneous offset?
+    # DISTANCE_TOP = window.Window.SIZE_DISPLAY_HEIGHT * 0.05
+    # DISTANCE_LEFT = window.Window.SIZE_DISPLAY_WIDTH * 0.05
 
     DISTANCE_TOP = 1200 * 0.05
     DISTANCE_LEFT = 900 * 0.05

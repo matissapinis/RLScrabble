@@ -21,13 +21,20 @@ To-do for RLScrabble.py:
 import pygame as pg
 
 # Local files:
-import board, rack
+import board, menu, rack, window
 
 pg.init()
 pg.font.init()
 
-SIZE_DISPLAY_WIDTH = 1200 # 1200 / 800
-SIZE_DISPLAY_HEIGHT = 900 # 900 / 600
+'''
+DISPLAY_SCRABBLE = pg.display.set_mode((window.Window.SIZE_DISPLAY_WIDTH, window.Window.SIZE_DISPLAY_HEIGHT))
+pg.display.set_caption("RLScrabble")
+DISPLAY_SCRABBLE.fill(window.Window.COLOR_DISPLAY)
+'''
+
+## SIZE_DISPLAY_WINDOW = pg.display.Info()
+SIZE_DISPLAY_WIDTH = 1200 # 1200 / 800 / SIZE_DISPLAY_WINDOW.current_w
+SIZE_DISPLAY_HEIGHT = 900 # 900 / 600 / SIZE_DISPLAY_WINDOW.current_h
 
 COLOR_DISPLAY = (255, 255, 255)
 
@@ -61,6 +68,11 @@ def RLScrabble():
         pg.display.update()
 
 def run_game():
+    ''' Removed since will only use HvA 1v1 mode:
+    game_menu = menu.Menu()
+    game_menu.draw_menu(DISPLAY_SCRABBLE)
+    '''
+
     game_board = board.Board()
     game_board.draw_board(DISPLAY_SCRABBLE)
 
