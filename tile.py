@@ -19,7 +19,8 @@ To-do for tile.py:
 import pygame as pg
 
 # Local files:
-## import board, rack
+import board
+import rack
 
 class Tile:
     COLOR_TILE_BORDER = (100, 100, 100)
@@ -36,7 +37,7 @@ class Tile:
     NAME_FONT_LETTER = 'liberationsans'
     NAME_FONT_VALUE = 'liberationsans'
 
-    SIZE_FONT_LETTER = 24
+    SIZE_FONT_LETTER = 72
     SIZE_FONT_VALUE = 6
 
     FONT_LETTER = pg.font.SysFont(NAME_FONT_LETTER, SIZE_FONT_VALUE)
@@ -53,12 +54,42 @@ class Tile:
         else:
             self.color_area = Tile.COLOR_TILE_AREA_UNCLICKED
 
-    def is_tile_blank(self, letter, value):
-        return letter == None and value == 0
+    def is_tile_blank(self):
+        return self.letter == '' and self.value == 0
 
     ## TBC:
-    def draw_tile(self, DISPLAY_SCRABBLE):
-        return None
+    def draw_tile(self, DISPLAY_SCRABBLE, x_position, y_position):
+        pg.draw.rect(DISPLAY_SCRABBLE, Tile.COLOR_TILE_BORDER,
+                     (x_position + 2, rack.Rack.DISTANCE_LEFT + 2, board.Board.SIZE_SQUARE_AREA - 3,
+                      board.Board.SIZE_SQUARE_AREA - 3))
+
+        pg.draw.rect(DISPLAY_SCRABBLE, Tile.COLOR_TILE_AREA,
+                     (x_position + 3, rack.Rack.DISTANCE_LEFT + 3, board.Board.SIZE_SQUARE_AREA - 5,
+                      board.Board.SIZE_SQUARE_AREA - 5))
+
+        # Class.FONT_VARIABLE.render(text, antialias, color, background)
+        text_letter = Tile.FONT_LETTER.render(self.letter, True, Tile.COLOR_TILE_BORDER, Tile.COLOR_TILE_AREA)
+        area_letter = text_letter.get_rect()
+        area_letter.center = (x_position + board.Board.SIZE_SQUARE_AREA / 2, y_position + board.Board.SIZE_SQUARE_AREA / 2)
+        DISPLAY_SCRABBLE.blit(text_letter, area_letter)
+
+        text_value = Tile.FONT_VALUE.render(str(self.value), True, Tile.COLOR_TILE_BORDER, Tile.COLOR_TILE_AREA)
+        area_value = text_letter.get_rect()
+        area_value.center = (x_position + board.Board.SIZE_SQUARE_AREA - 3, y_position + board.Board.SIZE_SQUARE_AREA/3 - 3)
+        DISPLAY_SCRABBLE.blit(text_value, area_value)
+
+        print(self.letter, self.value)
+
+        ''' From rack.py:
+        for i in range(Rack.DIMENSION_RACK):
+            x_position = Rack.DISTANCE_TOP + i * (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP)
+
+            pg.draw.rect(DISPLAY_SCRABBLE, tile.Tile.COLOR_TILE_BORDER,
+                         (x_position + 2, Rack.DISTANCE_LEFT + 2, board.Board.SIZE_SQUARE_AREA - 3, board.Board.SIZE_SQUARE_AREA - 3))
+
+            pg.draw.rect(DISPLAY_SCRABBLE, tile.Tile.COLOR_TILE_AREA,
+                         (x_position + 3, Rack.DISTANCE_LEFT + 3, board.Board.SIZE_SQUARE_AREA - 5, board.Board.SIZE_SQUARE_AREA - 5))
+        '''
 
 '''
     Fonts available on my system via pg.font.get_fonts():

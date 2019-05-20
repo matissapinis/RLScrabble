@@ -21,7 +21,11 @@ To-do for RLScrabble.py:
 import pygame as pg
 
 # Local files:
-import bag, board, dictionary, rack, window
+import bag
+import board
+import dictionary
+import rack
+import window
 
 pg.init()
 pg.font.init()
@@ -76,12 +80,11 @@ def run_game():
     game_board = board.Board()
     game_board.draw_board(DISPLAY_SCRABBLE)
 
-    p1_rack = rack.Rack()
-    p1_rack.draw_rack(DISPLAY_SCRABBLE)
-
     game_bag = bag.Bag()
-
     game_dictionary = dictionary.Dictionary()
+
+    p1_rack = rack.Rack(game_bag)
+    p1_rack.draw_rack(DISPLAY_SCRABBLE)
 
 RLScrabble()
 pg.quit()

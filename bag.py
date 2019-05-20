@@ -61,7 +61,7 @@ class Bag:
         shuffle(self.tiles)
 
     def pull_tile(self):
-        if self.is_empty():
+        if self.is_bag_empty():
             return None
 
         return self.tiles.pop()
@@ -71,7 +71,7 @@ class Bag:
 
         shuffle(self.tiles)
 
-    def is_empty(self):
+    def is_bag_empty(self):
         return len(self.tiles) == 0
 
 ''' Unused Latvian tile set:

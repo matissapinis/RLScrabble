@@ -15,7 +15,9 @@ Date edited:    2019/05/20
 import pygame as pg
 
 # Local files:
-import board, tile, window
+import board
+import tile
+import window
 
 class Menu:
     DIMENSION_MENU = 3

@@ -21,7 +21,9 @@ To-do for rack.py:
 import pygame as pg
 
 # Local files:
-import board, tile
+import bag
+import board
+import tile
 
 class Rack:
     DIMENSION_RACK = 7
@@ -29,10 +31,10 @@ class Rack:
     DISTANCE_TOP = 270 - 2
     DISTANCE_LEFT = 840
 
-    def __init__(self):
+    def __init__(self, game_bag):
         self.rack = []
-        for x in range(Rack.DIMENSION_RACK):
-            self.rack.append(None)
+        for i in range(Rack.DIMENSION_RACK):
+            self.rack.append(game_bag.pull_tile())
 
     def is_rack_empty(self):
         return len(self.rack) == 0
@@ -46,12 +48,18 @@ class Rack:
                       (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + 4) * Rack.DIMENSION_RACK + 7,
                       (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + 4) * 1 + 7))
 
-        for x in range(Rack.DIMENSION_RACK):
-            x_position = Rack.DISTANCE_TOP + x * (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP)
+        for i in range(Rack.DIMENSION_RACK):
+            x_position = Rack.DISTANCE_TOP + i * (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP)
+            tile.Tile.draw_tile(self.rack[i], DISPLAY_SCRABBLE, x_position, Rack.DISTANCE_LEFT)
+            '''
+            x_position = Rack.DISTANCE_TOP + i * (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP)
 
             pg.draw.rect(DISPLAY_SCRABBLE, tile.Tile.COLOR_TILE_BORDER,
                          (x_position + 2, Rack.DISTANCE_LEFT + 2, board.Board.SIZE_SQUARE_AREA - 3, board.Board.SIZE_SQUARE_AREA - 3))
 
             pg.draw.rect(DISPLAY_SCRABBLE, tile.Tile.COLOR_TILE_AREA,
                          (x_position + 3, Rack.DISTANCE_LEFT + 3, board.Board.SIZE_SQUARE_AREA - 5, board.Board.SIZE_SQUARE_AREA - 5))
+
+            '''
+
 

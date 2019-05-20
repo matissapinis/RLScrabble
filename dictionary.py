@@ -21,5 +21,3 @@ class Dictionary:
             word = line.rstrip()
             self.words.append(word)
 
-
-

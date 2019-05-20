@@ -11,7 +11,6 @@ Date edited:    2019/04/29
 '''
 
 # Libraries:
-import pygame as pg
 
 class Window:
     ## SIZE_DISPLAY_WINDOW = pg.display.Info()
