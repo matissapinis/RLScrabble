@@ -11,7 +11,6 @@ Date edited:    2019/05/20
 '''
 
 # Libraries:
-import pygame as pg
 from random import shuffle
 
 # Local files:
@@ -67,3 +66,17 @@ class Bag:
                 self.tiles.append(tile.Tile(letter, value))
 
         shuffle(self.tiles)
+
+    def pull_tile(self):
+        if self.is_empty():
+            return None
+
+        return self.tiles.pop()
+
+    def return_tile(self, tile):
+        self.tiles.append(tile)
+
+        shuffle(self.tiles)
+
+    def is_empty(self):
+        return len(self.tiles) == 0
