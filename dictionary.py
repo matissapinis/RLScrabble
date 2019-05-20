@@ -6,7 +6,7 @@ bag.py:
 Contains the class modelling the game dictionary being used.
 
 Author:         Matīss Apinis (ma17058)
-Date created:   2019/04/28
+Date created:   2019/05/20
 Date edited:    2019/05/20
 '''
 

@@ -7,7 +7,7 @@ Contains the class modelling player tile racks.
 
 Author:         Matīss Apinis (ma17058)
 Date created:   2019/04/28
-Date edited:    2019/04/29
+Date edited:    2019/05/20
 '''
 
 '''

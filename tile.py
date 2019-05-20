@@ -7,12 +7,7 @@ Contains the class modelling game tiles.
 
 Author:         Matīss Apinis (ma17058)
 Date created:   2019/04/28
-Date edited:    2019/04/29
-'''
-
-'''
-To-do for tile.py:
-1) Make draw_tile(...) primary in rack.py rectangle drawing.
+Date edited:    2019/05/20
 '''
 
 # Libraries:
