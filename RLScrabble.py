@@ -7,12 +7,12 @@ Contains the main part of the application that initiates the "Scrabble" game.
 
 Author:         Matīss Apinis (ma17058)
 Date created:   2019/04/28
-Date edited:    2019/04/29
+Date edited:    2019/05/20
 '''
 
 '''
 To-do for RLScrabble.py:
-1) Make drawing positions dependent on window size from new window.py.
+-- 1) Make drawing positions dependent on window size from new window.py.
 2) Highlight clicked rack tiles.
 3) Make window and consequently tile size dependent on resolution / monitor size.
 '''
@@ -21,7 +21,7 @@ To-do for RLScrabble.py:
 import pygame as pg
 
 # Local files:
-import board, menu, rack, window
+import bag, board, rack, window
 
 pg.init()
 pg.font.init()
@@ -78,6 +78,8 @@ def run_game():
 
     p1_rack = rack.Rack()
     p1_rack.draw_rack(DISPLAY_SCRABBLE)
+
+    game_bag = bag.Bag()
 
 RLScrabble()
 pg.quit()
