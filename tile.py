@@ -34,13 +34,13 @@ class Tile:
 
     pg.font.init()
 
-    NAME_FONT_LETTER = 'liberationsans'
-    NAME_FONT_VALUE = 'liberationsans'
+    NAME_FONT_LETTER = 'bahnschrift'
+    NAME_FONT_VALUE = 'bahnschrift'
 
-    SIZE_FONT_LETTER = 72
-    SIZE_FONT_VALUE = 6
+    SIZE_FONT_LETTER = 28
+    SIZE_FONT_VALUE = 12
 
-    FONT_LETTER = pg.font.SysFont(NAME_FONT_LETTER, SIZE_FONT_VALUE)
+    FONT_LETTER = pg.font.SysFont(NAME_FONT_LETTER, SIZE_FONT_LETTER)
     FONT_VALUE = pg.font.SysFont(NAME_FONT_VALUE, SIZE_FONT_VALUE)
 
     def __init__(self, letter, value):
@@ -68,15 +68,19 @@ class Tile:
                       board.Board.SIZE_SQUARE_AREA - 5))
 
         # Class.FONT_VARIABLE.render(text, antialias, color, background)
-        text_letter = Tile.FONT_LETTER.render(self.letter, True, Tile.COLOR_TILE_BORDER, Tile.COLOR_TILE_AREA)
-        area_letter = text_letter.get_rect()
-        area_letter.center = (x_position + board.Board.SIZE_SQUARE_AREA / 2, y_position + board.Board.SIZE_SQUARE_AREA / 2)
-        DISPLAY_SCRABBLE.blit(text_letter, area_letter)
+        if not self.is_tile_blank():
+            text_letter = Tile.FONT_LETTER.render(self.letter, True, board.Board.COLOR_BACKGROUND) # , Tile.COLOR_TILE_AREA)
+            area_letter = text_letter.get_rect()
+            area_letter.center = (x_position + board.Board.SIZE_SQUARE_AREA / 2, y_position + board.Board.SIZE_SQUARE_AREA / 2)
+            DISPLAY_SCRABBLE.blit(text_letter, area_letter)
 
-        text_value = Tile.FONT_VALUE.render(str(self.value), True, Tile.COLOR_TILE_BORDER, Tile.COLOR_TILE_AREA)
-        area_value = text_letter.get_rect()
-        area_value.center = (x_position + board.Board.SIZE_SQUARE_AREA - 3, y_position + board.Board.SIZE_SQUARE_AREA/3 - 3)
-        DISPLAY_SCRABBLE.blit(text_value, area_value)
+            ''' !!! Change tile value color to board background: '''
+            text_value = Tile.FONT_VALUE.render(str(self.value), True, Tile.COLOR_TILE_BORDER) # board.Board.COLOR_BACKGROUND) # , Tile.COLOR_TILE_AREA)
+            area_value = text_letter.get_rect()
+            ''' !!! Fix tile value text aligning too close or over to right edge (only on rack so far): '''
+            area_value.center = (x_position + board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP - 6,
+                                 y_position + board.Board.SIZE_SQUARE_AREA)
+            DISPLAY_SCRABBLE.blit(text_value, area_value)
 
         print(self.letter, self.value)
 
