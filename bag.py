@@ -19,6 +19,63 @@ import tile
 class Bag:
     # Dictionary of tiles by letter as key with 2-tuple as value containing its score value and copy count in bag:
     tile_set = {
+        'A': (1, 9),
+        'B': (3, 2),
+        'C': (3, 2),
+        'D': (2, 4),
+        'E': (1, 12),
+        'F': (4, 2),
+        'G': (2, 3),
+        'H': (4, 2),
+        'I': (1, 9),
+        'J': (8, 1),
+        'K': (5, 1),
+        'L': (1, 4),
+        'M': (3, 2),
+        'N': (1, 6),
+        'O': (1, 8),
+        'P': (3, 2),
+        'Q': (10, 1),
+        'R': (1, 6),
+        'S': (1, 4),
+        'T': (1, 6),
+        'U': (1, 4),
+        'V': (4, 2),
+        'W': (4, 2),
+        'X': (8, 1),
+        'Y': (4, 2),
+        'Z': (10, 1),
+        '': (0, 2),
+    }
+
+    def __init__(self):
+        self.tiles = []
+
+        for letter, tuple in self.tile_set.items():
+            value = tuple[0]
+            count = tuple[1]
+
+            for i in range(count):
+                self.tiles.append(tile.Tile(letter, value))
+
+        shuffle(self.tiles)
+
+    def pull_tile(self):
+        if self.is_empty():
+            return None
+
+        return self.tiles.pop()
+
+    def return_tile(self, tile):
+        self.tiles.append(tile)
+
+        shuffle(self.tiles)
+
+    def is_empty(self):
+        return len(self.tiles) == 0
+
+''' Unused Latvian tile set:
+ tile_set = {
         'A': (1, 11),
         'Ā': (2, 4),
         'B': (5, 1),
@@ -53,30 +110,4 @@ class Bag:
         'Z': (3, 2),
         'Ž': (8, 1),
         '':  (None, 2),
-    }
-
-    def __init__(self):
-        self.tiles = []
-
-        for letter, tuple in self.tile_set.items():
-            value = tuple[0]
-            count = tuple[1]
-
-            for i in range(count):
-                self.tiles.append(tile.Tile(letter, value))
-
-        shuffle(self.tiles)
-
-    def pull_tile(self):
-        if self.is_empty():
-            return None
-
-        return self.tiles.pop()
-
-    def return_tile(self, tile):
-        self.tiles.append(tile)
-
-        shuffle(self.tiles)
-
-    def is_empty(self):
-        return len(self.tiles) == 0
+'''
