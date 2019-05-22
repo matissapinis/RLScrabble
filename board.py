@@ -21,7 +21,8 @@ To-do for board.py:
 import pygame as pg
 
 # Local files:
-import tile, window
+import tile
+import window
 
 class Board:
     DIMENSION_BOARD = 15
@@ -79,6 +80,8 @@ class Board:
     DISTANCE_TOP = 1200 * 0.05
     DISTANCE_LEFT = 900 * 0.05
 
+    square = []
+
     def __init__(self):
         self.square = []
         for x in range(Board.DIMENSION_BOARD):
@@ -98,6 +101,8 @@ class Board:
         for (x, y) in self.POSITIONS_WORD_3X:
             self.square[x][y] = (None, Board.PREMIUM_WORD_3X)
 
+
+    ''' Draws the game board: '''
     def draw_board(self, DISPLAY_SCRABBLE):
         pg.draw.rect(DISPLAY_SCRABBLE, Board.COLOR_BACKGROUND,
                      (Board.DISTANCE_TOP - 5, Board.DISTANCE_LEFT - 5,
@@ -125,3 +130,26 @@ class Board:
 
                 pg.draw.rect(DISPLAY_SCRABBLE, square_color,
                              (x_position + 3, y_position + 3, Board.SIZE_SQUARE_AREA - 5, Board.SIZE_SQUARE_AREA - 5))
+
+
+    ''' Returns the (x,y)-position coordinates from screen: '''
+    def get_board_position(self, x_position, y_position):
+        x_position -= Board.DISTANCE_LEFT + Board.SIZE_SQUARE_BORDER
+        y_position -= Board.DISTANCE_TOP + Board.SIZE_SQUARE_BORDER
+
+        if x_position >= 0 and y_position >= 0:
+            if (x_position % (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + Board.SIZE_SQUARE_GAP) <
+                (Board.SIZE_SQUARE_AREA - Board.SIZE_SQUARE_BORDER - Board.SIZE_SQUARE_GAP) and
+                y_position % (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + Board.SIZE_SQUARE_GAP) <
+                 (Board.SIZE_SQUARE_AREA - Board.SIZE_SQUARE_BORDER - Board.SIZE_SQUARE_GAP)):
+                board_x = (int)(x_position / (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + Board.SIZE_SQUARE_GAP))
+                board_y = (int)(y_position / (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + Board.SIZE_SQUARE_GAP))
+
+                if board_x < Board.DIMENSION_BOARD and board_y < Board.DIMENSION_BOARD:
+                    print('GBP', board_x, board_y) ##
+                    return (board_x, board_y)
+
+        print('GBP', -1, -1) ##
+        return (-1, -1)
+
+

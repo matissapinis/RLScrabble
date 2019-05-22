@@ -24,6 +24,7 @@ import pygame as pg
 import bag
 import board
 import dictionary
+import player
 import rack
 import window
 
@@ -47,12 +48,27 @@ pg.display.set_caption("RLScrabble")
 DISPLAY_SCRABBLE.fill(COLOR_DISPLAY)
 
 def RLScrabble():
+    game_board = board.Board()
+    game_board.draw_board(DISPLAY_SCRABBLE)
+
+    game_bag = bag.Bag()
+    game_dictionary = dictionary.Dictionary()
+
+    game_racks = []
+    for i in range(2):
+        game_racks[i] = rack.Rack(game_bag)
+    user_rack = game_racks[0]
+    user_rack.draw_rack(DISPLAY_SCRABBLE)
+
+    game_players = []
+    for i in range(2):
+        game_players.append(player.Player(i, game_board, game_bag, game_racks[i]))
+
     game_running = True
 
     mouse_moved = False
     mouse_clicked = False
 
-    run_game()
     while game_running:
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -66,27 +82,15 @@ def RLScrabble():
                 print(event.pos) ##
 
             if mouse_clicked:
-                ## TBC: Highlight clicked rack tile.
-                assert("## TBC:")
+                tile_picked = player.Player.pick_tile(mouse_x_pos, mouse_y_pos, game_board, game_players[0])
+                redraw_game(game_board, user_rack)
 
         pg.display.update()
 
-def run_game():
-    ''' Removed since will only use HvA 1v1 mode:
-    game_menu = menu.Menu()
-    game_menu.draw_menu(DISPLAY_SCRABBLE)
-    '''
-
-    game_board = board.Board()
+## Should include drawing player scores:
+def redraw_game(game_board, user_rack):
     game_board.draw_board(DISPLAY_SCRABBLE)
-
-    game_bag = bag.Bag()
-    game_dictionary = dictionary.Dictionary()
-
-    game_rack = rack.Rack(game_bag)
-    game_rack.draw_rack(DISPLAY_SCRABBLE)
-
-
+    user_rack.draw_rack(DISPLAY_SCRABBLE)
 
 RLScrabble()
 pg.quit()
