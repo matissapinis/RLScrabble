@@ -105,14 +105,14 @@ class Board:
     ''' Draws the game board: '''
     def draw_board(self, DISPLAY_SCRABBLE):
         pg.draw.rect(DISPLAY_SCRABBLE, Board.COLOR_BACKGROUND,
-                     (Board.DISTANCE_TOP - 5, Board.DISTANCE_LEFT - 5,
+                     (Board.DISTANCE_TOP - 5 - 3 * Board.SIZE_SQUARE_GAP, Board.DISTANCE_LEFT - 5 + 4 * Board.SIZE_SQUARE_GAP, ### Last terms in both arguments are hotfixes.
                       (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + 4) * Board.DIMENSION_BOARD + 8,
                       (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + 4) * Board.DIMENSION_BOARD + 8))
 
         for x in range(Board.DIMENSION_BOARD):
             for y in range(Board.DIMENSION_BOARD):
-                x_position = Board.DISTANCE_TOP + x * (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + Board.SIZE_SQUARE_GAP)
-                y_position = Board.DISTANCE_LEFT + y * (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + Board.SIZE_SQUARE_GAP)
+                x_position = Board.DISTANCE_TOP + x * (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + Board.SIZE_SQUARE_GAP) - 3 * Board.SIZE_SQUARE_GAP ### Last term is a hotfix.
+                y_position = Board.DISTANCE_LEFT + y * (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + Board.SIZE_SQUARE_GAP) + 4 * Board.SIZE_SQUARE_GAP ###
 
                 if self.square[x][y][1] == Board.PREMIUM_LETTER_2X:
                     square_color = Board.COLOR_LETTER_2X
@@ -134,8 +134,8 @@ class Board:
 
     ''' Returns the (x,y)-position coordinates from screen: '''
     def get_board_position(self, x_position, y_position):
-        x_position -= Board.DISTANCE_LEFT + Board.SIZE_SQUARE_BORDER
-        y_position -= Board.DISTANCE_TOP + Board.SIZE_SQUARE_BORDER
+        x_position -= (Board.DISTANCE_LEFT + Board.SIZE_SQUARE_BORDER + Board.SIZE_SQUARE_GAP)
+        y_position -= (Board.DISTANCE_TOP + Board.SIZE_SQUARE_BORDER + Board.SIZE_SQUARE_GAP)
 
         if x_position >= 0 and y_position >= 0:
             if (x_position % (Board.SIZE_SQUARE_AREA + Board.SIZE_SQUARE_BORDER + Board.SIZE_SQUARE_GAP) <

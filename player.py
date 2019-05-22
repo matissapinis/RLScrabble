@@ -7,10 +7,10 @@ Contains the class modelling the player-user and performing game moves.
 
 Author:         Matīss Apinis (ma17058)
 Date created:   2019/05/21
-Date edited:    2019/05/21
+Date edited:    2019/05/22
 '''
 
-''''
+'''
 TO-DO:
 1) Instances of tile_current get confusing -- remove them for straight returns and assignments etc.
 '''
@@ -23,7 +23,6 @@ import bag
 import board
 import rack
 import tile
-import RLScrabble
 
 class Player:
     player_types = ['User', 'Computer']
@@ -55,10 +54,11 @@ class Player:
 
         return (False, tile_current)
 
-
-    def pick_tile(self, x_position, y_position, game_board, tile_picked):
+    ### TypeError: pick_tile() missing 1 required positional argument: 'game_board' :: =None awkward fix.
+    def pick_tile(self, x_position, y_position, game_board):  # , tile_picked):
+    #def pick_tile(self, x_position=None, y_position=None, game_board=None): #, tile_picked):
         if self.hand == None:
-            tile_current = Player.lift_board_tile(x_position, y_position)
+            tile_current = self.lift_board_tile(x_position, y_position)
 
             if tile_current != None:
                 if tile_current.is_tile_blank():
@@ -76,7 +76,7 @@ class Player:
 
             if move_success:
                 if move_success == "INPUT_LETTER":
-                    self.choose_letter(move_tile, RLScrabble.DISPLAY_SCRABBLE)
+                    self.choose_letter(move_tile, DISPLAY_SCRABBLE)
                 self.temporary_move()
                 return None
             else:
@@ -98,7 +98,7 @@ class Player:
 
 
     def lift_rack_tile(self, x_position, y_position):
-        index_rack = self.rack.get_rack_index(x_position, y_position)
+        index_rack = self.rack.get_rack_position(x_position, y_position)
 
         if index_rack != -1 and index_rack < len(self.rack):
             if self.hand == None:
@@ -129,65 +129,63 @@ class Player:
     def choose_letter(self, tile_current):
         while tile_current.letter == '':
             for event in pg.event.get():
-                if event_type == KEYUP:
-                    if event.key == K_a:
+                if event.type == pg.KEYUP:
+                    if event.key == pg.K_a:
                         tile_current.letter = 'A'
-                    elif event.key == K_b:
+                    elif event.key == pg.K_b:
                         tile_current.letter = 'B'
-                    elif event.key == K_c:
+                    elif event.key == pg.K_c:
                         tile_current.letter = 'C'
-                    elif event.key == K_d:
+                    elif event.key == pg.K_d:
                         tile_current.letter = 'D'
-                    elif event.key == K_e:
+                    elif event.key == pg.K_e:
                         tile_current.letter = 'E'
-                    elif event.key == K_f:
+                    elif event.key == pg.K_f:
                         tile_current.letter = 'F'
-                    elif event.key == K_g:
+                    elif event.key == pg.K_g:
                         tile_current.letter = 'G'
-                    elif event.key == K_h:
+                    elif event.key == pg.K_h:
                         tile_current.letter = 'H'
-                    elif event.key == K_i:
+                    elif event.key == pg.K_i:
                         tile_current.letter = 'I'
-                    elif event.key == K_j:
+                    elif event.key == pg.K_j:
                         tile_current.letter = 'J'
-                    elif event.key == K_k:
+                    elif event.key == pg.K_k:
                         tile_current.letter = 'K'
-                    elif event.key == K_l:
+                    elif event.key == pg.K_l:
                         tile_current.letter = 'L'
-                    elif event.key == K_m:
+                    elif event.key == pg.K_m:
                         tile_current.letter = 'M'
-                    elif event.key == K_n:
+                    elif event.key == pg.K_n:
                         tile_current.letter = 'N'
-                    elif event.key == K_o:
+                    elif event.key == pg.K_o:
                         tile_current.letter = 'O'
-                    elif event.key == K_p:
+                    elif event.key == pg.K_p:
                         tile_current.letter = 'P'
-                    elif event.key == K_q:
+                    elif event.key == pg.K_q:
                         tile_current.letter = 'Q'
-                    elif event.key == K_r:
+                    elif event.key == pg.K_r:
                         tile_current.letter = 'R'
-                    elif event.key == K_s:
+                    elif event.key == pg.K_s:
                         tile_current.letter = 'S'
-                    elif event.key == K_t:
+                    elif event.key == pg.K_t:
                         tile_current.letter = 'T'
-                    elif event.key == K_u:
+                    elif event.key == pg.K_u:
                         tile_current.letter = 'U'
-                    elif event.key == K_v:
+                    elif event.key == pg.K_v:
                         tile_current.letter = 'V'
-                    elif event.key == K_w:
+                    elif event.key == pg.K_w:
                         tile_current.letter = 'W'
-                    elif event.key == K_x:
+                    elif event.key == pg.K_x:
                         tile_current.letter = 'X'
-                    elif event.key == K_y:
+                    elif event.key == pg.K_y:
                         tile_current.letter = 'Y'
-                    elif event.key == K_z:
+                    elif event.key == pg.K_z:
                         tile_current.letter = 'Z'
 
             pg.display.update()
 
     # def play_move(self):
-
-
 
 
 

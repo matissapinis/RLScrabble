@@ -77,7 +77,7 @@ class Tile:
                                  y_position + board.Board.SIZE_SQUARE_AREA)
             DISPLAY_SCRABBLE.blit(text_value, area_value)
 
-        print(self.letter, self.value)
+        #### print(self.letter, self.value)
 
         ''' From rack.py:
         for i in range(Rack.DIMENSION_RACK):

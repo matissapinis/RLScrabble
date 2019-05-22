@@ -56,7 +56,7 @@ def RLScrabble():
 
     game_racks = []
     for i in range(2):
-        game_racks[i] = rack.Rack(game_bag)
+        game_racks.append(rack.Rack(game_bag))
     user_rack = game_racks[0]
     user_rack.draw_rack(DISPLAY_SCRABBLE)
 
@@ -68,6 +68,8 @@ def RLScrabble():
 
     mouse_moved = False
     mouse_clicked = False
+
+    tile_picked = None
 
     while game_running:
         for event in pg.event.get():
@@ -82,7 +84,8 @@ def RLScrabble():
                 print(event.pos) ##
 
             if mouse_clicked:
-                tile_picked = player.Player.pick_tile(mouse_x_pos, mouse_y_pos, game_board, game_players[0])
+                ###print(game_board)
+                tile_picked = game_players[0].pick_tile(mouse_x_pos, mouse_y_pos, game_board) #, tile_picked) # game_players[0])
                 redraw_game(game_board, user_rack)
 
         pg.display.update()

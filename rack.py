@@ -44,13 +44,13 @@ class Rack:
 
     def draw_rack(self, DISPLAY_SCRABBLE):
         pg.draw.rect(DISPLAY_SCRABBLE, board.Board.COLOR_BACKGROUND,
-                     (Rack.DISTANCE_TOP - 5, Rack.DISTANCE_LEFT - 5,
+                     (Rack.DISTANCE_TOP - 5 - 3 * board.Board.SIZE_SQUARE_GAP, Rack.DISTANCE_LEFT - 5 + 4 * board.Board.SIZE_SQUARE_GAP, ### Last terms in both arguments are hotfixes.
                       (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + 4) * Rack.DIMENSION_RACK + 7,
                       (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + 4) * 1 + 7))
 
         for i in range(Rack.DIMENSION_RACK):
-            x_position = Rack.DISTANCE_TOP + i * (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP)
-            tile.Tile.draw_tile(self.rack[i], DISPLAY_SCRABBLE, x_position, Rack.DISTANCE_LEFT)
+            x_position = Rack.DISTANCE_TOP + i * (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP) - 3 * board.Board.SIZE_SQUARE_GAP ### Last term is hotfix.
+            tile.Tile.draw_tile(self.rack[i], DISPLAY_SCRABBLE, x_position, Rack.DISTANCE_LEFT) # + 4 * board.Board.SIZE_SQUARE_GAP) ### Last term of last argument is hotfix.
             '''
             x_position = Rack.DISTANCE_TOP + i * (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP)
 
@@ -59,7 +59,23 @@ class Rack:
 
             pg.draw.rect(DISPLAY_SCRABBLE, tile.Tile.COLOR_TILE_AREA,
                          (x_position + 3, Rack.DISTANCE_LEFT + 3, board.Board.SIZE_SQUARE_AREA - 5, board.Board.SIZE_SQUARE_AREA - 5))
-
             '''
+
+    ### AttributeError: 'Rack' object has no attribute 'get_rack_index'
+    def get_rack_position(self, x_position, y_position):
+        x_position -= Rack.DISTANCE_LEFT + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP ### Not sure about last term.
+        y_position -= Rack.DISTANCE_TOP + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP ### Not sure about last term.
+
+        if x_position >= 0 and y_position >= 0 and y_position <= (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP):
+            if (x_position % (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP) <
+                    (board.Board.SIZE_SQUARE_AREA - board.Board.SIZE_SQUARE_BORDER - board.Board.SIZE_SQUARE_GAP) and
+                    y_position % (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP) <
+                    (board.Board.SIZE_SQUARE_AREA - board.Board.SIZE_SQUARE_BORDER - board.Board.SIZE_SQUARE_GAP)):
+                rack_pos = (int)(x_position / (board.Board.SIZE_SQUARE_AREA + board.Board.SIZE_SQUARE_BORDER + board.Board.SIZE_SQUARE_GAP))
+
+                if rack_pos < len(self.rack):
+                    return rack_pos
+
+        return -1
 
 
