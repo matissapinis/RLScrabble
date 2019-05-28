@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/RLScrabble.iml" filepath="$PROJECT_DIR$/.idea/RLScrabble.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/wordsmith-master.iml" filepath="$PROJECT_DIR$/.idea/wordsmith-master.iml" />
     </modules>
   </component>
 </project>
