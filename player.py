@@ -158,7 +158,7 @@ class Player:
 		
 		(tiles, points) = self.game_board.play_move(move_first)
 		
-		# The play was successful, add the points to our score and grab new tiles
+		# The play was successful, add the points to our score and grab new tiles.
 		if tiles == None and points >= 0:
 			self.total_score += points
 			self.delta_score = points

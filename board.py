@@ -454,7 +454,8 @@ class Board:
 			spellings.append(spelling)	
 			if not self.dictionary.is_word_valid(spelling):
 				# Fails if word isn't a valid dictionary word.
-				self.remove_tiles_fast(tiles_played)				
+				self.remove_tiles_fast(tiles_played)
+				print(spelling, 'is not in the dictionary.')
 				return (-1, None, seed_ratio)
 		
 		# Calculate score:
