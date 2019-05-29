@@ -373,30 +373,30 @@ class Board:
 				temporary_tiles.append(pos)
 
 		seed_ratio = self.calculate_seed_ratio()
-		
+
 	
-		# Ensure a crossword is formed (also keep a list of words built):
+		# Ensure a crossword is formed and keep a list of words built:
 		'''
 		Find all the crosswords by going through all the rows
 		and columns which contain temporary tiles (potential words).
 		
-		Start with a temporary tile on that row/column and expand outward in both directions until we
-		hit a blank on both ends (the created word).
+		Start with a temporary tile on that row/column and expand outward in both directions
+		until hitting a blank on both ends (the created word).
 		
 		Go through the words and confirm that a previously played tile was used.
 		'''
 	
-		# First build a list of possible word rows and cols (include x and y for the first seed tile).
+		# First build a list of possible word rows and columns.
 		rows_to_check = []
 		columns_to_check = []
-		column_set = []
+		row_set = []
 		column_set = []
 		for (x, y) in temporary_tiles:
 			if not x in column_set:
 				column_set.append(x)
 				columns_to_check.append((x, y))
-			if not y in column_set:
-				column_set.append(y)
+			if not y in row_set:
+				row_set.append(y)
 				rows_to_check.append((x, y))
 		
 		# Build words along rows:
@@ -404,12 +404,12 @@ class Board:
 			
 			# Build left:
 			left = col
-			while left-1 >= 0 and self.square[left - 1][row][0] != None:
+			while left - 1 >= 0 and self.square[left - 1][row][0] != None:
 				left -= 1
 			
 			# Build right:
 			right = col
-			while right+1 < Board.DIMENSION_BOARD and self.square[right + 1][row][0] != None:
+			while right + 1 < Board.DIMENSION_BOARD and self.square[right + 1][row][0] != None:
 				right += 1
 			
 			# Add the word built if it has at least 2 letters:
@@ -455,7 +455,6 @@ class Board:
 			if not self.dictionary.is_word_valid(spelling):
 				# Fails if word isn't a valid dictionary word.
 				self.remove_tiles_fast(tiles_played)
-				print(spelling, 'is not in the dictionary.')
 				return (-1, None, seed_ratio)
 		
 		# Calculate score:
@@ -470,37 +469,37 @@ class Board:
 		# Stores words where word bonuses are conflicted.
 		words_conflicting = []
 		i = 0
-		# We can only get bonuses for one word, so only apply corner bonuses once
+		# We can only get bonuses for one word, so only apply corner bonuses once.
 		marks = []
 		for word in words_built:
 			word_scores[i] = 0
-			wordBonus = 1
-			for (x, y), tile in word:
-				letterScore = tile.value
+			word_bonus = 1
+			for (x, y), tile_current in word:
+				letter_score = tile_current.value
 				# Can't get bonuses for previously played tiles.
 				if self.square[x][y][0].locked == False:
 					crosswords = self.shared((x, y), words_built)
 					bonus = self.square[x][y][1]
 					if bonus == Board.PREMIUM_LETTER_2X and not (x, y) in marks:
-						letterScore *= 2
+						letter_score *= 2
 						marks.append((x, y))
 					elif bonus == Board.PREMIUM_LETTER_3X and not (x, y) in marks:
-						letterScore *= 3
+						letter_score *= 3
 						marks.append((x, y))
 					elif bonus == Board.PREMIUM_WORD_2X:
 						if len(crosswords) <= 1:
-							wordBonus *= 2
+							word_bonus *= 2
 						else:
 							if not (2, crosswords) in words_conflicting:
 								words_conflicting.append((2, crosswords))
 					elif bonus == Board.PREMIUM_WORD_3X:
 						if len(crosswords) <= 1:
-							wordBonus *= 3
+							word_bonus *= 3
 						else:
 							if not (3, crosswords) in words_conflicting:
 								words_conflicting.append((3, crosswords))
-				word_scores[i] += letterScore
-			word_scores[i] *= wordBonus
+				word_scores[i] += letter_score
+			word_scores[i] *= word_bonus
 			i += 1
 			
 		# If are conflicts, then go through all permutations to retrieve the highest possible score.
@@ -515,7 +514,7 @@ class Board:
 			
 		# Pull the tiles if we put them on in this call.
 		self.remove_tiles_fast(tiles_played)
-				
+
 		return (total_score, spellings, seed_ratio)
 
 	'''
